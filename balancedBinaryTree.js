@@ -1,4 +1,4 @@
-//二叉平衡树
+//不固定左右度值相差为一的二叉平衡树  二叉查找树
 var arr = new Array();
 for (var i = 0; i < 100000; i++) {
     var num = Math.round(Math.random() * 100000);
