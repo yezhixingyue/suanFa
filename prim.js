@@ -1,4 +1,4 @@
-var pointSet = [];
+var pointSet = [];      //['A','B','C','D','E']
 var max = 1000000;
 var distance = [
     [0, 4, 7, max, max],

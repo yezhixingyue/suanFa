@@ -98,8 +98,9 @@ function kruskal(pointSet, distance) {
 
 kruskal(pointSet, distance)
 
-console.log(a)
-console.log(b)
-console.log(c)
-console.log(d)
-console.log(e)
+// console.log(a)
+// console.log(b)
+// console.log(c)
+// console.log(d)
+// console.log(e)
+console.log(pointSet)
