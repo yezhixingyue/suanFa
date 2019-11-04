@@ -98,7 +98,7 @@ function getDeep(root) {
     var rightDeep = getDeep(root.right);
     return Math.max(leftDeep, rightDeep) + 1;
 }
-console.log(getDeep(root))
+// console.log(getDeep(root))
 
 //判断是否为二叉平衡树
 function isBalanceTree(root) {
@@ -122,7 +122,7 @@ e.left = d;
 c.left = e;
 c.right = f;
 
-console.log(isBalanceTree(root))
+// console.log(isBalanceTree(root))
 
 //二叉树的右旋
 function rightRotate(a) {   //
@@ -186,6 +186,10 @@ function changeToBalance(root) { //二叉搜索树转换至平衡二叉树
 //   把要变化的子树的高度调整为满足旋转条件(不是最大)；因为整体右旋时需要左旋，整体左旋时需要右旋，所以可称为左右双旋 右左双旋
 //3. 左左旋转/右右旋转：当二叉树出现旋转时，需要对其旋转变化后的分支重新进行一次检测与修改，当左旋时，旋转节点的左边发生变化，要
 //   对左边进行校验，右旋时旋转节点的右边发生变化，要对右边进行校验，所以称为左左旋转和右右旋转
+var root1 = buildBinaryTree(arr);
+var node = changeToBalance(root1)
+// console.log(isBalanceTree(node))
 
-var node = changeToBalance(root)
-console.log(isBalanceTree(node))
+
+i = 0;
+console.log(searchInTree(node, 888), i) 
