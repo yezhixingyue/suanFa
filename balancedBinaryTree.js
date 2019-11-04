@@ -24,15 +24,15 @@ function Node(value) {
 }
 
 //提供一个根节点和一个数值，通过对比大小来判定位置串联生成二叉树的关系
-function balance(root, num) {
+function addNode(root, num) {
     if (root == null) return;
     if (root.value == num) return;
     if (root.value > num) {
         if (root.left == null) root.left = new Node(num);
-        else balance(root.left, num)
+        else addNode(root.left, num)
     } else {
         if (root.right == null) root.right = new Node(num);
-        else balance(root.right, num)
+        else addNode(root.right, num)
     }
 
 }
@@ -42,7 +42,7 @@ function buildBinaryTree(arr) {
     // if (!root) return;
     var node = new Node(arr[0]);
     for (var i = 0; i < arr.length; i++) {
-        balance(node, arr[i]);
+        addNode(node, arr[i]);
     }
     return node;
 }
@@ -94,9 +94,9 @@ console.log(searchInTree(root, 888), i)
 //查找一个平衡二叉树的度的值
 function getDeep(root) {
     if (root == null) return 0;
-    var left = getDeep(root.left);
-    var right = getDeep(root.right);
-    return Math.max(left, right) + 1;
+    var leftDeep = getDeep(root.left);
+    var rightDeep = getDeep(root.right);
+    return Math.max(leftDeep, rightDeep) + 1;
 }
 console.log(getDeep(root))
 
@@ -137,8 +137,8 @@ function rightRotate(a) {   //
 function leftRotate(a) {    //左旋
     if (a == null) return a;
     var node = a.right;
-    a.right = node.left;    //首先让当前节点的right 等于 旋转节点的left
-    node.left = a;          //然后让旋转节点的left等于当前节点
+    a.right = node.left;    //首先让旋转节点的right 等于 新根的left
+    node.left = a;          //然后让新根的left等于旋转节点
     return node;
 }
 
@@ -163,13 +163,13 @@ function changeToBalance(root) { //二叉搜索树转换至平衡二叉树
         //下面的不平衡，所以需要对变化的该部分进行新的一次平衡判断及修改(旋转)；因为二叉树左旋的时候，变化分支是加到了旋转节点的左
         //边部分子节点分支上面，即左旋时，旋转节点的左边发生变化，右旋时，旋转节点右边发现改变，所以，左旋时要对左边重新进行一次平
         //衡检测及修改，右旋则对右边进行一次重新检测和修改，这个可以称为左左旋转和右右旋转
-        var node = rightRotate(root);
-        node.right = changeToBalance(node.right);
+        var newRoot = rightRotate(root);
+        newRoot.right = changeToBalance(newRoot.right);
         //最后对最终返回的根节点重新进行一次平衡术的校验；并返回该节点（其为旋转节点，也是最终的根节点）
-        return changeToBalance(node);
+        return changeToBalance(newRoot);
     } else {
         var changeTreeDeep = getDeep(root.right.left);
-        var noChangeTreeDeep = getDeep(root.left.right);
+        var noChangeTreeDeep = getDeep(root.right.right);
         if(changeTreeDeep > noChangeTreeDeep) {
             root.right = rightRotate(root.right) 
         }
@@ -187,5 +187,5 @@ function changeToBalance(root) { //二叉搜索树转换至平衡二叉树
 //3. 左左旋转/右右旋转：当二叉树出现旋转时，需要对其旋转变化后的分支重新进行一次检测与修改，当左旋时，旋转节点的左边发生变化，要
 //   对左边进行校验，右旋时旋转节点的右边发生变化，要对右边进行校验，所以称为左左旋转和右右旋转
 
-var node = changeToBalance(a)
-console.log(isBalanceTree(arr))
+var node = changeToBalance(root)
+console.log(isBalanceTree(node))
